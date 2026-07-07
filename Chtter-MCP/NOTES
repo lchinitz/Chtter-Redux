@@ -1,0 +1,16 @@
+Location of desktop configuration file:
+C:\Users\leigh\AppData\Local\Packages\Claude_pzs8sxrjxfjjc\LocalCache\Roaming\Claude
+
+The whatsapp mcp bridge needs to be running to use the server.  Go to
+/home/lchinitz/Documents/whatsapp-mcp/whatsapp-bridge
+and run it with
+go run main.go
+
+Command Line connection to the database:
+mysql -h chtter-mcp-database.cp1vvnnejoms.us-west-2.rds.amazonaws.com -P 3306 -u admin -p --ssl-mode=VERIFY_IDENTITY --ssl-ca=./global-bundle.pem
+Use the Desktop tool DBeaver to access it using a GUI.  (mySQL Desktop is not working anymore.)
+
+The new Chtter server is running at localhost:4444, and you have to lauch it from
+/home/lchinitz/Documents/chtter-server/chtter-server.js
+This server is how you can manipulate the mySQL database, on the AWS cloud, that is storing the contact information for the users (for now.)
+The command line to get at that database is above.
