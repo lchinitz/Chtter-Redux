@@ -2,6 +2,8 @@
   "dependencies": {
     "aws-sdk": "^2.1693.0",
     "cors": "^2.8.6",
+    "database": "^0.0.2",
+    "database.js": "^0.0.1",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "mysql": "^2.18.1",

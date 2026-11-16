@@ -8,13 +8,17 @@ const cors = require('cors');
 const fs = require('fs');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
-dotenv.config();
+
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '.env') });   // replaces dotenv.config()
+//dotenv.config();
 
 let port = 8787;
 let hport = 8447;
 
 let app = express();
-app.use(express.static("./"));
+//app.use(express.static("./"));
+app.use(express.static(__dirname));
 app.use(cors());
 app.use(bodyParser.json({ limit: "200mb", parameterLimit: "1000000" }));
 app.use(bodyParser.urlencoded({ extended: true, limit: "200mb", parameterLimit: "1000000" }));
@@ -64,7 +68,8 @@ async function queryDB(query){
 	    database: 'chtter',
 	    user: 'admin',
 	    password,
-	    ssl: { rejectUnauthorized: false, ca: require('fs').readFileSync('./global-bundle.pem') }
+		ssl: { rejectUnauthorized: false, ca: fs.readFileSync(path.join(__dirname, 'global-bundle.pem')) }
+	    //ssl: { rejectUnauthorized: false, ca: require('fs').readFileSync('./global-bundle.pem') }
 	});
 
 	const [rows] = await connection.execute(query);
@@ -81,7 +86,8 @@ async function queryDB(query){
 function homePage(){
     console.log('... load home page ... ' );
     
-    var html = fs.readFileSync('index.html');
+    //var html = fs.readFileSync('index.html');
+	var html = fs.readFileSync(path.join(__dirname, 'index.html'));
     res.writeHead(200, {'Content-type': 'text/html'} );
     res.end(html);
 	
